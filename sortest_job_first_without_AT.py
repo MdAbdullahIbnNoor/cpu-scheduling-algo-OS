@@ -27,8 +27,6 @@ def print_process_table(processes, waiting_times, turnaround_times, completion_t
         pid, bt = processes[i]
         print(f"\tP{pid}\t\t{bt}\t\t{completion_times[i]}\t\t{waiting_times[i]}\t\t{turnaround_times[i]}")
 
-
-
 def calculate_and_print_averages(waiting_times, turnaround_times):
     n = len(waiting_times)
     avg_wt = sum(waiting_times) / n
@@ -47,7 +45,6 @@ def sjn_scheduling(burst_times):
 
     print_process_table(sorted_processes, waiting_times, turnaround_times, completion_times)
     calculate_and_print_averages(waiting_times, turnaround_times)
-
 
 
 if __name__ == "__main__":
