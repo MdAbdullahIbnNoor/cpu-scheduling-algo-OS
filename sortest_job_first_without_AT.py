@@ -8,6 +8,11 @@ def calculate_waiting_times(processes):
         waiting_times[i] = waiting_times[i - 1] + processes[i - 1][1]
     return waiting_times
 
+def calculate_completion_times(processes, waiting_times):
+    completion_times = [0] * len(processes)
+    for i in range(len(processes)):
+        completion_times[i] = waiting_times[i] + processes[i][1]
+    return completion_times
 
 def calculate_turnaround_times(processes, waiting_times):
     turnaround_times = [0] * len(processes)
@@ -16,11 +21,12 @@ def calculate_turnaround_times(processes, waiting_times):
     return turnaround_times
 
 
-def print_process_table(processes, waiting_times, turnaround_times):
-    print("Process\t\tBT\t\tWT\t\tTAT")
+def print_process_table(processes, waiting_times, turnaround_times, completion_times):
+    print("Process\t\tBT\t\tCT\t\tWT\t\tTAT")
     for i in range(len(processes)):
         pid, bt = processes[i]
-        print(f"\tP{pid}\t\t{bt}\t\t{waiting_times[i]}\t\t{turnaround_times[i]}")
+        print(f"\tP{pid}\t\t{bt}\t\t{completion_times[i]}\t\t{waiting_times[i]}\t\t{turnaround_times[i]}")
+
 
 
 def calculate_and_print_averages(waiting_times, turnaround_times):
@@ -33,15 +39,15 @@ def calculate_and_print_averages(waiting_times, turnaround_times):
 
 def sjn_scheduling(burst_times):
     processes = [(i + 1, bt) for i, bt in enumerate(burst_times)]
-
     sorted_processes = sort_by_burst_time(processes)
 
     waiting_times = calculate_waiting_times(sorted_processes)
-
     turnaround_times = calculate_turnaround_times(sorted_processes, waiting_times)
+    completion_times = calculate_completion_times(sorted_processes, waiting_times)
 
-    print_process_table(sorted_processes, waiting_times, turnaround_times)
+    print_process_table(sorted_processes, waiting_times, turnaround_times, completion_times)
     calculate_and_print_averages(waiting_times, turnaround_times)
+
 
 
 if __name__ == "__main__":
