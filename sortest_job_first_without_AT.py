@@ -1,7 +1,6 @@
 def sort_by_burst_time(processes):
     return sorted(processes, key=lambda x: x[1])
 
-
 def calculate_waiting_times(processes):
     waiting_times = [0] * len(processes)
     for i in range(1, len(processes)):
@@ -20,7 +19,6 @@ def calculate_turnaround_times(processes, waiting_times):
         turnaround_times[i] = waiting_times[i] + processes[i][1]
     return turnaround_times
 
-
 def print_process_table(processes, waiting_times, turnaround_times, completion_times):
     print("Process\t\tBT\t\tCT\t\tWT\t\tTAT")
     for i in range(len(processes)):
@@ -33,7 +31,6 @@ def calculate_and_print_averages(waiting_times, turnaround_times):
     avg_tat = sum(turnaround_times) / n
     print(f"\nAverage Waiting Time: {avg_wt:.2f}")
     print(f"Average Turnaround Time: {avg_tat:.2f}")
-
 
 def sjn_scheduling(burst_times):
     processes = [(i + 1, bt) for i, bt in enumerate(burst_times)]
